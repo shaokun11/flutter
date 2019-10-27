@@ -27,6 +27,7 @@ class Words extends ChangeNotifier {
 
   addWords() {
     _totalWords.addAll(generateWordPairs().take(20));
+    notifyListeners();
   }
 
   addFavoriteWord(WordPair wordPair) {
