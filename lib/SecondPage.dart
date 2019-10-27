@@ -47,7 +47,6 @@ class _SecondPageState extends State<SecondPage>
               .toList(),
         ),
       ),
-
       body: TabBarView(controller: _tabController, children: [
         Container(
           child: Text("$currentIndex"),

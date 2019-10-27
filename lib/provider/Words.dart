@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 class Words extends ChangeNotifier {
   var _totalWords = [];
   var _savedWords = new Set<WordPair>();
-  bool _add = false;
+
+  int get length => _totalWords.length;
 
   getTotal() {
     return _totalWords;
@@ -14,20 +15,18 @@ class Words extends ChangeNotifier {
     return _savedWords;
   }
 
-  delWords(WordPair wordPair){
-    if(_savedWords.contains(wordPair)) {
+  delWords(WordPair wordPair) {
+    if (_savedWords.contains(wordPair)) {
       _savedWords.remove(wordPair);
     }
-    if(_totalWords.contains(wordPair)) {
+    if (_totalWords.contains(wordPair)) {
       _totalWords.remove(wordPair);
     }
     notifyListeners();
   }
 
   addWords() {
-    if (_add) return ;
-    _add = true;
-    _totalWords.addAll(generateWordPairs().take(100));
+    _totalWords.addAll(generateWordPairs().take(20));
   }
 
   addFavoriteWord(WordPair wordPair) {
