@@ -15,16 +15,30 @@ class _AccountPage extends State<AccountPage> {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
-  void _onRefresh() async {
+  void _onRefresh(BuildContext context) async {
     await Future.delayed(Duration(seconds: 3));
     await _words.addWords();
     _refreshController.refreshCompleted();
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(
+        "success",
+        style: TextStyle(color: Colors.green),
+      ),
+      backgroundColor: Colors.black26,
+    ));
   }
 
   void _onLoading() async {
     await Future.delayed(Duration(seconds: 5));
     await _words.addWords();
     _refreshController.loadComplete();
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(
+        "success",
+        style: TextStyle(color: Colors.green),
+      ),
+      backgroundColor: Colors.black45,
+    ));
   }
 
   @override
@@ -37,7 +51,7 @@ class _AccountPage extends State<AccountPage> {
           enablePullUp: true,
           header: WaterDropMaterialHeader(),
           footer: ClassicFooter(),
-          onRefresh: _onRefresh,
+          onRefresh: () => _onRefresh(context),
           onLoading: _onLoading,
           controller: _refreshController,
           child: ListView.builder(
